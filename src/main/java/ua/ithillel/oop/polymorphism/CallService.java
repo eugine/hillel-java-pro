@@ -17,6 +17,7 @@ public class CallService {
         var buttonPhone = new ButtonPhone();
 
         service.callPhone(smartPhone, "112");
+
         service.callPhone(buttonPhone);
 
     }

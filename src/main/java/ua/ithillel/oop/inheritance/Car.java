@@ -1,6 +1,11 @@
 package ua.ithillel.oop.inheritance;
 
-public class Car {
+public abstract class Car {
+
+    public Car() {
+
+    }
+
     public void start() {
         System.out.println("Завести машину");
     }
@@ -8,5 +13,7 @@ public class Car {
     public void stop() {
         System.out.println("Заглушити машину");
     }
+
+    public abstract String name();
 
 }

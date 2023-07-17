@@ -1,5 +1,7 @@
 package ua.ithillel.oop.abstraction;
 
+import java.util.List;
+
 public class CoffeeMachine {
 
     /*
@@ -13,8 +15,14 @@ public class CoffeeMachine {
         System.out.println("Кава готова");
     }
 
+    @Override
+    public String toString() {
+        return "CoffeeMachine{}";
+    }
 
     public static void main(String[] args) {
-        System.out.println(new CoffeeMachine());
+        var machine = new CoffeeMachine();
+        machine.brew();
+
     }
 }
