@@ -13,4 +13,9 @@ public class TryCatchFinally {
             System.out.println("я завжди викликаюсь");
         }
     }
+
+    public void demo() {
+        throw new MyException("My exception");
+    }
+
 }
