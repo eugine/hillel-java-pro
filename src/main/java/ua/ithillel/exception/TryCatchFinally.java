@@ -15,7 +15,7 @@ public class TryCatchFinally {
     }
 
     public void demo() {
-        throw new MyException("My exception");
+//        throw new MyException("My exception");
     }
 
 }

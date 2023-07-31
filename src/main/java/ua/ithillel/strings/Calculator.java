@@ -8,8 +8,10 @@ public class Calculator {
         return a + b;
     }
 
-    public int minus(int a, int b) {
-        return a - b;
+
+    public int minus(int arg1, int arg2) {
+        // arg1 super minus arg2
+        return arg1 - arg2;
     }
 
     public Result divideAnother(int a, int b) {
@@ -33,6 +35,8 @@ public class Calculator {
 
     public static void main(String[] args) {
         var calc = new Calculator();
+
+        calc.minus(10, 3);
 
         try {
             var result1 = calc.divide(10, 0);
