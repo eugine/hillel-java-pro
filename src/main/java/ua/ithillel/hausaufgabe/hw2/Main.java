@@ -14,19 +14,19 @@ public class Main {
         };
 
         for (Participant participant: participants) {
-            System.out.println("========= Participant starts");
-            boolean completed = true;
-            for (Obstacle obstacle: obstacles) {
-                if (!obstacle.overcome(participant)) {
-                    System.out.println("Participant left the challenge on " + obstacle);
-                    completed = false;
-                    break;
-                }
-            }
-            if (completed) {
+            if (iterateOverObstacles(obstacles, participant)) {
                 System.out.println("Participant completed the challenge");
             }
-
         }
+    }
+
+    private static boolean iterateOverObstacles(Obstacle[] obstacles, Participant participant) {
+        for (Obstacle obstacle: obstacles) {
+            if (!obstacle.overcome(participant)) {
+                System.out.println("Participant left the challenge on " + obstacle);
+                break;
+            }
+        }
+        return true;
     }
 }
