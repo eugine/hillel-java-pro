@@ -6,22 +6,28 @@ public class Main {
     public static void main(String[] args) {
         // створення
         Map<String, Integer> map = new TreeMap<String, Integer>();
+        Map<String, Integer> map2 = new HashMap<>();
+        Map<String, Integer> map3 = new LinkedHashMap<>();
 
         var mapWithGenerics = new TreeMap<String, Integer>();
+
         var unmodifiableMap = Map.of(
                 "key1", "name1",
-                "key2", "name2");
+                "key2", "name2"
+        );
 
         // додавання, доступ до елементів
 
         map.put("secret", 1111);
-        map.get("secret");
+
+        Integer value = map.get("secret");
 
 
         //raw map
         Map rawMap = new HashMap();
         rawMap.put("key1", 1111);
         rawMap.put("key2", "other_value");
+
 
         //включення
         boolean containsKey = map.containsKey("secret");
@@ -34,8 +40,8 @@ public class Main {
         //stream від коллекції
 
         //додавання
-        var map2 = new HashMap<String, Integer>();
-        map2.putAll(map);
+//        var map2 = new HashMap<String, Integer>();
+//        map2.putAll(map);
 
         //видалення
         map.remove("other_key");
