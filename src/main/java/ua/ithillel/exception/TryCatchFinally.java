@@ -5,7 +5,7 @@ public class TryCatchFinally {
         try {
             //do job
             throw new RuntimeException();
-        } catch (NumberFormatException | MyException ex) {
+        } catch (NumberFormatException e) {
 
         } catch (RuntimeException ex) {
             ex.printStackTrace();

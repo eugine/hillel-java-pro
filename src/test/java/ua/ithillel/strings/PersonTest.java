@@ -20,6 +20,7 @@ class PersonTest {
         target.setPersonName("YYYY");
 
         assertEquals("YYYY", target.getName());
+
     }
 
 }

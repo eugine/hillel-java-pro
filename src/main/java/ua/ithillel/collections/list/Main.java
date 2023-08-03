@@ -1,6 +1,7 @@
 package ua.ithillel.collections.list;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,26 +21,28 @@ public class Main {
 
         items.addAll(items2);
 
-        items.remove("two");
-        items.remove(0);
+//        items.remove("two");
+//        items.remove(0);
+//
+//        String value = items.get(0);
+//
+//        boolean result = items.contains("one");
+//
+//
+//        System.out.println("1 --------------------");
+//        foriLoop(items);
+//
+//        System.out.println("2 --------------------");
+//        for (String item : items) {
+//            System.out.println("Item: " + item);
+//        }
 
-        String value = items.get(0);
-
-        boolean result = items.contains("one");
-
-
-        System.out.println("1 --------------------");
-        foriLoop(items);
-
-        System.out.println("2 --------------------");
-        for (String item : items) {
-            System.out.println("Item: " + item);
-        }
-
-//        iterator(items);
+        iterator(items);
     }
 
     private static void foriLoop(List<String> items) {
+        // variable
+        // var
         for (int i = 0; i < items.size(); i++) {
             System.out.println("Item: " + items.get(i));
         }
@@ -55,6 +58,19 @@ public class Main {
 
 
     private static void iterator(List<String> items) {
+
+        Iterator<String> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            System.out.println("element v1: " + element);
+        }
+
+        for (String element: items) {
+            System.out.println("element v2: " + element);
+        }
+
+
+        /*
         var iter = items.listIterator();
         System.out.println(iter.hasNext());
         System.out.println(iter.hasPrevious());
@@ -62,7 +78,7 @@ public class Main {
         System.out.println(iter.hasNext());
         System.out.println(iter.hasPrevious());
         System.out.println("-----------------" + iter.previous());
-        iter.previous();
+        iter.previous();*/
     }
 
 }

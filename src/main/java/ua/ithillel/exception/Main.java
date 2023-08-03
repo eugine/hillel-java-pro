@@ -21,7 +21,7 @@ public class Main {
     public static Integer parseInt(String input) throws MyException {
         try {
             return Integer.parseInt(input);
-        } catch (NumberFormatException ex) {
+        } catch (RuntimeException ex) {
             throw new MyException("My Exception", ex);
         }
     }
