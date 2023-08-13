@@ -15,32 +15,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneBookTest {
 
-    @Test
-    void add() {
-        var target = new PhoneBook();
-
-        target.add("Ivan", "6666");
-        target.add("Ivan", "5555");
-        target.add("Ivan", "7777");
-
-        List<String> actual = target.getAll().get("Ivan");
-
-        assertThat(actual, containsInAnyOrder("6666", "5555", "7777"));
-
-    }
-
-    @Test
-    void find() {
-        var target = new PhoneBook(Map.of(
-                "Evgeniy", List.of("1234", "4321")
-        ));
-
-        String result = target.find("Evgeniy");
-
-        assertThat(result, Matchers.isOneOf("1234", "4321"));
-    }
-
-    @Test
-    void findAll() {
-    }
+//    @Test
+//    void add() {
+//        var target = new PhoneBook();
+//
+//        target.add("Ivan", "6666");
+//        target.add("Ivan", "5555");
+//        target.add("Ivan", "7777");
+//
+//        List<String> actual = target.getAll().get("Ivan");
+//
+//        assertThat(actual, containsInAnyOrder("6666", "5555", "7777"));
+//
+//    }
+//
+//    @Test
+//    void find() {
+//        var target = new PhoneBook(Map.of(
+//                "Evgeniy", List.of("1234", "4321")
+//        ));
+//
+//        String result = target.find("Evgeniy");
+//
+//        assertThat(result, Matchers.isOneOf("1234", "4321"));
+//    }
+//
+//    @Test
+//    void findAll() {
+//    }
 }

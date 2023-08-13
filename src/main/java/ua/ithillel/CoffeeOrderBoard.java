@@ -1,45 +1,67 @@
 package ua.ithillel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class CoffeeOrderBoard {
 
-    //private final Map
-    //private final Set
+    private final List<Order> orders = new ArrayList<>();
 
-    /*
-6. Реалізувати метод draw у класі CoffeeOrderBoard.
-Цей метод виводить у консоль інформацію про поточний стан черги
 
-у порядку найближчого до видачі замовлення.
+    public class Order {
+        private String name;
+        private String order;
 
-Наприклад:
-=============
-Num | Name
-4 | Alen
-27 | Yoda
-33 | Obi-van
-34 | John Snow
-     */
-
-//    public Map<Integer, String> draw() {
-    public Set<CoffeeOrder> draw() {
-
-        return null;
-    }
-
-    public record CoffeeOrder(Integer num, String name) {
-
-    }
-
-    public void print() {
-        System.out.println("=============");
-        System.out.println("Num | Name");
-        for(var item: draw()) {
-            System.out.println(item.num() + " | " + item.name());
+        public Order(String name, String order) {
+            this.name = name;
+            this.order = order;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getOrder() {
+            return order;
+        }
+
+        public void setOrder(String order) {
+            this.order = order;
+        }
+
+        @Override
+        public String toString() {
+            return "Order{" +
+                    "name='" + name + '\'' +
+                    ", order='" + order + '\'' +
+                    '}';
+        }
     }
+
+    public void add(String name, String order) {
+        if (name == null || name.length() < 3) {
+            throw new IllegalArgumentException("Name must not be null");
+        }
+        orders.add(new Order(name, order));
+    }
+
+
+    public void finishOrder(String name) {
+        orders.remove(null);
+    }
+
+    public List<Order> getAll() {
+        return new ArrayList<>(orders);
+    }
+
+
+
+
 
 }
