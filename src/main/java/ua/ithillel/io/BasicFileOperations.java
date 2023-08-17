@@ -10,26 +10,31 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class BasicFileOperations {
 
     public static void basic() throws IOException {
-//        Path path = Path.of("src", "main", "resources", "hw3-words.db");
-        Path path = Path.of("src/main/resources/hw3-words.db");
+        Path path = Path.of("src", "main", "resources");
+//        Path path = Path.of("src/main/resources/hw3-words.db");
+
         System.out.println("absolute path: " + path.toAbsolutePath());
 
 
-//        File file = path.toFile();
-        File file = new File("src/main/resources/hw3-words.db");
-
+        File file = path.toFile();
+//        File file = new File("src/main/resources/hw3-words.db");
+//
         file.getName();
-        file.exists();
-        file.mkdirs();
+        System.out.println(file.exists());
+//        file.mkdirs();
+//        file.mkdir();
 //        file.delete();
+        System.out.println("Length: " + file.length());
 
-        Files.size(path);
-        Files.list(path);
-        Files.isDirectory(path);
+//
+        System.out.println("Length 2: " + Files.size(path));
+
+        System.out.println(Files.list(path).toList());
+        System.out.println(Files.isDirectory(path));
     }
 
     public static void readFileWithInputStream() {
-        try (var is = new FileInputStream("src/main/resources/hw3-words.db")) {
+        try (InputStream is = new FileInputStream("src/main/resources/hw3-words.db")) {
             byte[] bytes = is.readAllBytes();
             System.out.println(new String(bytes, UTF_8));
         } catch (IOException e) {
@@ -39,10 +44,14 @@ public class BasicFileOperations {
 
     public static void readFileWithReader() {
         var path = Path.of("src/main/resources/hw3-words.db");
+        System.out.println();
         try (var is = new InputStreamReader(new FileInputStream(path.toFile()))){
             int c;
             while ((c = is.read()) != -1) {
-                System.out.print((char) c);
+                char value = (char) c;
+                if (value != '\n' && value != '\r') {
+                    System.out.print(value);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -60,24 +69,32 @@ public class BasicFileOperations {
     }
 
 
-    public static void writeToFileWithOutputStream() {
-        try (var out = new FileOutputStream("out/1.txt")) {
-            out.write("message".getBytes(UTF_8));
+    public static void writeToFileWithOutputStream() throws IOException {
+//        OutputStream out = new BufferedOutputStream(new FileOutputStream("out/2.txt"));
+//        for (int i = 0; i < 1000; i++) {
+//            out.write(("message " + i + "\n").getBytes(UTF_8));
+//        }
+//        out.close();
+
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream("out/1.txt"))) {
+            for (int i = 0; i < 1000; i++) {
+                out.write(("message " + i + "\n").getBytes(UTF_8));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void writeToFileWithWriter() throws FileNotFoundException {
-        try (var out = new OutputStreamWriter(new FileOutputStream("out/2.txt"))) {
-            out.write("message");
+        try (var out = new OutputStreamWriter(new FileOutputStream("out/3.txt"))) {
+            out.write("message  333333");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void readFromResources() {
-        try (var is = BasicFileOperations.class.getResourceAsStream("/hw3-words.db")) {
+        try (InputStream is = BasicFileOperations.class.getResourceAsStream("/hw3-words.db")) {
             byte[] bytes = is.readAllBytes();
             System.out.println(new String(bytes, UTF_8));
         } catch (IOException e) {
@@ -90,7 +107,7 @@ public class BasicFileOperations {
     }
 
     public static void main(String[] args) throws IOException {
-        basic();
+//        basic();
 
 //        readFileWithInputStream();
 //        readFileWithReader();
@@ -98,7 +115,7 @@ public class BasicFileOperations {
 
 //        writeToFileWithOutputStream();
 //        writeToFileWithWriter();
-//        readFromResources();
+        readFromResources();
     }
 
 
