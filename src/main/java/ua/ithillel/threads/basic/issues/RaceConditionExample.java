@@ -27,7 +27,7 @@ public class RaceConditionExample {
     }
 
     private static void updateState(RaceConditionState state) {
-        state.status = "alarm" + (state.counter + 1);
+//        state.status = "alarm" + (state.counter + 1);
         state.counter = state.counter + 1;
     }
 
