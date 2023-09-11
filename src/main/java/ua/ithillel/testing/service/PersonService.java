@@ -2,6 +2,9 @@ package ua.ithillel.testing.service;
 
 import ua.ithillel.testing.service.event.Event;
 import ua.ithillel.testing.service.repository.PersonRepository;
+import ua.ithillel.utils.LogUtils;
+
+import static ua.ithillel.utils.LogUtils.log;
 
 public class PersonService {
     private final PersonRepository personRepository;
