@@ -2,6 +2,7 @@ package ua.ithillel.hausaufgabe.lambdas;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HeroUtilsTest {
@@ -69,8 +72,8 @@ class HeroUtilsTest {
 
         assertThat(result, equalTo(
                 Map.of(
-                        "M", 3,
-                        "F", 2
+                        "M", 3L,
+                        "F", 2L
                 )
         ));
     }
