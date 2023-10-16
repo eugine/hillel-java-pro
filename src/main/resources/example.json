@@ -1,0 +1,16 @@
+{
+  "name": "value",
+  "name2": 123,
+  "obj": [
+    "one", "two", "three"
+  ],
+  "object": {
+    "key": "value",
+    "key2": {
+
+    }
+  }
+
+
+
+}
