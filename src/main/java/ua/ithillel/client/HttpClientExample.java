@@ -1,5 +1,6 @@
 package ua.ithillel.client;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
@@ -27,10 +28,13 @@ public class HttpClientExample {
         HttpResponse<String> response = HttpClient.newHttpClient()
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
-        log(response.body());
+        String body = response.body();
+        log(body);
 
 //        simpleParse(response);
-//        objectParse(response);
+        var parsed = objectParse(response);
+        log("name: " + parsed.name());
+        parsed.movies();
 
     }
 
@@ -46,9 +50,6 @@ public class HttpClientExample {
         return objectMapper.readValue(response.body(), MovieResponse.class);
     }
 
-    @Data
-    public static class MovieResponse{
-        private String name;
-        private List<String> movies;
+    public record MovieResponse (String name, List<String> movies) {
     }
 }
