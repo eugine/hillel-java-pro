@@ -1,12 +1,6 @@
 package ua.ithillel.rest;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ua.ithillel.dao.student.StudentDto;
 import ua.ithillel.dao.student.StudentService;
 
@@ -14,9 +8,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
 public class RestControllerExample {
     private final StudentService studentService;
+
+    public RestControllerExample(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/students")
     public List<StudentDto> getStudents() {
@@ -33,8 +30,15 @@ public class RestControllerExample {
         return studentService.persist(request);
     }
 
-    //update
-    //delete
+    @DeleteMapping("/students/{id}")
+    public void deleteStudent(@PathVariable("id") Long studentId) {
+        studentService.delete(studentId);
+    }
+
+    @PutMapping("/students/{id}")
+    public StudentDto updateStudent(@PathVariable("id") Long studentId, @RequestBody StudentDto request) {
+        return studentService.update(studentId, request);
+    }
 
 
 }

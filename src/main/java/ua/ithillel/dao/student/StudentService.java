@@ -48,9 +48,9 @@ public class StudentService {
                 .orElseThrow();
     }
 
-    public StudentDto update(StudentDto student) {
+    public StudentDto update(Long id, StudentDto student) {
         dao.update(Student.builder()
-                        .id(student.id())
+                        .id(id)
                         .name(student.name())
                         .email(student.email())
                         .major(student.major())
@@ -58,6 +58,10 @@ public class StudentService {
                         .updatedAt(LocalDateTime.now())
                 .build());
         return findLatestByName(student);
+    }
+
+    public void delete(Long id) {
+        dao.delete(id);
     }
 
 }
