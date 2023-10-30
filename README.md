@@ -13,6 +13,3 @@
 5. Import the dump:
     1. docker exec -it <image> bash
     2. psql -U hillel < dump.sql
-
-
-test
