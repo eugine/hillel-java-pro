@@ -3,7 +3,7 @@ package ua.ithillel.dao.student;
 import java.util.List;
 import java.util.Optional;
 
-interface StudentDao {
+public interface StudentDao {
     List<Student> findAll();
     Optional<Student> findById(Long id);
     List<Student> findByName(String name);

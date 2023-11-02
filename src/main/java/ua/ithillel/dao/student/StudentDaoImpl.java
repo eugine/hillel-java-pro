@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl implements StudentDao {
     private final DataSource dataSource;
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Optional;
 public class StudentService {
     private final StudentDao dao;
 
-    protected StudentService(StudentDao dao) {
+    public StudentService(StudentDao dao) {
         this.dao = dao;
     }
 
