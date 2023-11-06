@@ -15,21 +15,21 @@ public class HibernateExample {
         var sessionFactory = context.getBean(SessionFactory.class);
 
         try (var session = sessionFactory.openSession()) {
-            var student = session.find(HibernateStudent.class, 1L);
-            log.info("Found student:" + student);
+            var student = session.find(HibernateStudent.class, 32L);
+            log.info("Found student: " + student);
 
-            var studentName = "Test_" + UUID.randomUUID().toString().substring(0, 5);
-            log.info("Creating a student with name: " + studentName);
-            var id = session.save(HibernateStudent.builder()
-                    .name(studentName)
-                    .email(studentName + "@example.com")
-                    .age(31)
-                    .createdAt(LocalDateTime.now())
-                    .updatedAt(LocalDateTime.now())
-                    .build());
-
-            var persistedStudent = session.find(HibernateStudent.class, id);
-            log.info("Found persisted student: " + persistedStudent);
+//            var studentName = "Test_" + UUID.randomUUID().toString().substring(0, 5);
+//            log.info("Creating a student with name: " + studentName);
+//            var id = session.save(HibernateStudent.builder()
+//                    .name(studentName)
+//                    .email(studentName + "@example.com")
+//                    .age(31)
+//                    .createdAt(LocalDateTime.now())
+//                    .updatedAt(LocalDateTime.now())
+//                    .build());
+//
+//            var persistedStudent = session.find(HibernateStudent.class, id);
+//            log.info("Found persisted student: " + persistedStudent);
 
         }
     }

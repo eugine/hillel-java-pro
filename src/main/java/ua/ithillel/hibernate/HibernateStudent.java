@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,6 +25,11 @@ public class HibernateStudent {
     private Integer age;
 
     private String email;
+
+    private String password;
+
+    @Column(name = "major")
+    private String education;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
