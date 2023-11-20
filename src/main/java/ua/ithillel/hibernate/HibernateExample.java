@@ -15,8 +15,8 @@ public class HibernateExample {
         var sessionFactory = context.getBean(SessionFactory.class);
 
         try (var session = sessionFactory.openSession()) {
-            var student = session.find(HibernateStudent.class, 1L);
-            log.info("Found student:" + student);
+//            var student = session.find(HibernateStudent.class, 1L);
+//            log.info("Found student:" + student);
 
             var studentName = "Test_" + UUID.randomUUID().toString().substring(0, 5);
             log.info("Creating a student with name: " + studentName);
@@ -29,8 +29,8 @@ public class HibernateExample {
                     .build();
             session.beginTransaction();
             session.persist(newStudent);
-            session.flush();
-//            session.getTransaction().commit();
+//            session.flush();
+            session.getTransaction().commit();
 
 
             log.info("New student: " + newStudent);
