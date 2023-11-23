@@ -17,4 +17,5 @@ import ua.ithillel.bank.entity.BaseEntity;
 public class Person extends BaseEntity {
     private String uid;
     private String name;
+    private String email;
 }

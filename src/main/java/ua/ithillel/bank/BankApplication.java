@@ -13,8 +13,3 @@ public class BankApplication {
     }
 }
 
-/*
-6. Add pagination & sorting
-7. Add query by example
-8. Add test -> not today
- */

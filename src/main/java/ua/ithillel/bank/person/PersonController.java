@@ -17,12 +17,11 @@ public class PersonController {
 
     @GetMapping
     public List<PersonDto> getAll(
-//            @RequestParam(value = "name", required = false) String name,
-//            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "email", required = false) String email,
             Pageable pageable) {
-//        log.info("getPersons: name={}, email={}", name, email);
-//        return personService.findPersons(name, email, pageable);
-        return personService.findPersons(pageable);
+        log.info("getPersons: name={}, email={}", name, email);
+        return personService.findPersons(name, email, pageable);
     }
 
     @GetMapping("/{id}")
