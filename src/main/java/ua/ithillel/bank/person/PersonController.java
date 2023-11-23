@@ -1,11 +1,13 @@
 package ua.ithillel.bank.person;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/persons")
 @RequiredArgsConstructor
@@ -14,8 +16,13 @@ public class PersonController {
     private final PersonService personService;
 
     @GetMapping
-    public List<PersonDto> getAll(Pageable pageable) {
-        return personService.getPersons(pageable);
+    public List<PersonDto> getAll(
+//            @RequestParam(value = "name", required = false) String name,
+//            @RequestParam(value = "email", required = false) String email,
+            Pageable pageable) {
+//        log.info("getPersons: name={}, email={}", name, email);
+//        return personService.findPersons(name, email, pageable);
+        return personService.findPersons(pageable);
     }
 
     @GetMapping("/{id}")
@@ -39,7 +46,6 @@ public class PersonController {
             @RequestBody PersonDto request) {
         return null;
     }
-
 
 
 }
