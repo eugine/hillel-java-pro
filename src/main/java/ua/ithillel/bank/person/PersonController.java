@@ -1,5 +1,6 @@
 package ua.ithillel.bank.person;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -24,9 +25,9 @@ public class PersonController {
         return personService.findPersons(name, email, pageable);
     }
 
-    @GetMapping("/{id}")
-    public PersonDto person(@PathVariable("id") String id) {
-        return personService.getPerson(id);
+    @GetMapping("/{uid}")
+    public PersonDto person(@PathVariable("uid") String uid) {
+        return personService.getPerson(uid);
     }
 
     @PostMapping
@@ -34,16 +35,16 @@ public class PersonController {
         return personService.create(request);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable("id") String id) {
-        //TODO: delete
+    @DeleteMapping("/{uid}")
+    public void deletePerson(@PathVariable("uid") String uid) {
+        personService.delete(uid);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{uid}")
     public PersonDto updatedPerson(
-            @PathVariable("id") String id,
+            @PathVariable("uid") String uid,
             @RequestBody PersonDto request) {
-        return null;
+        return personService.update(uid, request);
     }
 
 

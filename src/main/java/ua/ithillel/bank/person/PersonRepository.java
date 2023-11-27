@@ -12,8 +12,10 @@ import java.util.Optional;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
 
-    Optional<Person> findByUid(String id);
+    Optional<Person> findByUid(String uid);
     Page<Person> findByName(String name, Pageable pageable);
     Page<Person> findByEmail(String email, Pageable pageable);
     Page<Person> findByNameAndEmail(String name, String email, Pageable pageable);
+
+    void deleteByUid(String uid);
 }
