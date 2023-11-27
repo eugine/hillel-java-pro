@@ -1,9 +1,6 @@
 package ua.ithillel.bank.person;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -60,8 +57,8 @@ public class PersonService {
         return new PersonDto(person.getUid(), person.getName(), person.getEmail());
     }
 
-    public PersonDto getPerson(String id) {
-        return personRepository.findByUid(id)
+    public PersonDto getPerson(String uid) {
+        return personRepository.findByUid(uid)
                 .map(this::mapPerson)
                 .orElseThrow();
     }
@@ -73,4 +70,53 @@ public class PersonService {
                 .email(request.email())
                 .build()));
     }
+
+    @Transactional
+    public void delete(String uid) {
+        //1
+        personRepository.deleteByUid(uid);
+
+        //2
+        var person = findRequiredPerson(uid);
+        personRepository.deleteById(person.getId());
+
+        //3
+        personRepository.findByUid(uid)
+                .ifPresent(personRepository::delete);
+
+    }
+
+    private Person findRequiredPerson(String uid) {
+        return personRepository.findByUid(uid)
+                .orElseThrow(() -> new RuntimeException("Person not found"));
+    }
+
+    @Transactional
+    public PersonDto update(String uid, PersonDto request) {
+        var person = findRequiredPerson(uid);
+
+        person.setName(request.name());
+        person.setEmail(request.email());
+
+        return mapPerson(person);
+    }
+
+
+    public static class TransactionProxy {
+        private PersonService personService;
+
+        public PersonDto update(String uid, PersonDto request) {
+            //begin tx
+            try {
+                personService.update(uid, request);
+                //commit tx
+            } catch (Exception ex) {
+                //rollback tx
+            }
+            return null;
+        }
+    }
+
 }
+
+
