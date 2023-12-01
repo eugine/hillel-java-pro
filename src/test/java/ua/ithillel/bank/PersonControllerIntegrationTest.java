@@ -1,8 +1,6 @@
 package ua.ithillel.bank;
 
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
 import ua.ithillel.bank.person.Person;
 import ua.ithillel.bank.person.PersonDto;
 
@@ -39,7 +37,7 @@ public class PersonControllerIntegrationTest extends BaseTestContainerIntegratio
         var request = new PersonDto(null, "Test", "test_" + UUID.randomUUID() + "@example.com");
 
         var body = mockMvc.perform(post("/api/persons")
-                        .content( objectMapper.writeValueAsString(request))
+                        .content(objectMapper.writeValueAsString(request))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(notNullValue())))
