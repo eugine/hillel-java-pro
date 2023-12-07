@@ -47,8 +47,9 @@ public class PersonControllerIntegrationTest extends BaseTestContainerIntegratio
                 .getResponse()
                 .getContentAsString();
 
-        var entityId = objectMapper.readValue(body, PersonDto.class).id();
-        var persistedPerson = personRepository.findByUid(entityId).orElseThrow();
+        var personId = objectMapper.readValue(body, PersonDto.class).id();
+
+        var persistedPerson = personRepository.findByUid(personId).orElseThrow();
         assertThat(persistedPerson.getName(), equalTo(request.name()));
         assertThat(persistedPerson.getEmail(), equalTo(request.email()));
         assertThat(persistedPerson.getCreatedAt(), is(notNullValue()));
