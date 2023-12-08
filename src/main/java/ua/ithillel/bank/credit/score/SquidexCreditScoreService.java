@@ -1,6 +1,7 @@
 package ua.ithillel.bank.credit.score;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import ua.ithillel.bank.credit.score.model.SquidexResponse;
@@ -10,25 +11,25 @@ import java.util.Map;
 public class SquidexCreditScoreService implements CreditScoreService {
 
     private final SquidexProperties props;
-    private WebClient webClient;
+    private RestClient restClient;
 
     public SquidexCreditScoreService(SquidexProperties props) {
         this.props = props;
     }
 
-    private WebClient getWebClient() {
-        if (webClient == null) {
+    private RestClient getRestClient() {
+        if (restClient == null) {
             var token = createToken(props);
 
-            webClient = WebClient.builder()
+            restClient = RestClient.builder()
                     .defaultHeader("Authorization", "Bearer " + token)
                     .build();
         }
-        return webClient;
+        return restClient;
     }
 
     private Object createToken(SquidexProperties props) {
-        return WebClient.create().post()
+        return RestClient.create().post()
                 .uri(props.getTokenUrl())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData("grant_type", "client_credentials")
@@ -37,19 +38,17 @@ public class SquidexCreditScoreService implements CreditScoreService {
                         .with("scope", "squidex-api")
                 )
                 .retrieve()
-                .bodyToMono(Map.class)
-                .block()
+                .body(Map.class)
                 .get("access_token");
     }
 
 
     @Override
     public int getScore(String personId) {
-        SquidexResponse response = getWebClient().get()
+        var response = getRestClient().get()
                 .uri(props.getUrl())
                 .retrieve()
-                .bodyToMono(SquidexResponse.class)
-                .block();
+                .body(SquidexResponse.class);
         return response.getData().getScore().getIv();
     }
 }
