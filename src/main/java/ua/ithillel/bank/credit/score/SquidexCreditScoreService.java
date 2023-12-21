@@ -1,5 +1,6 @@
 package ua.ithillel.bank.credit.score;
 
+import jakarta.transaction.Transactional;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -44,6 +45,7 @@ public class SquidexCreditScoreService implements CreditScoreService {
 
 
     @Override
+    @Transactional
     public int getScore(String personId) {
         SquidexResponse response = getWebClient().get()
                 .uri(props.getUrl())
@@ -52,4 +54,22 @@ public class SquidexCreditScoreService implements CreditScoreService {
                 .block();
         return response.getData().getScore().getIv();
     }
+
+
+//    @Transactional
+    public void transaction() {
+
+        var card1 = "load_1";
+
+        //var fromAccount1  = card1.getAccount();
+
+        //fromAccount.setAmount(-100);
+        //accountRepository.save(fromAccount);
+
+        if (true) {
+            throw new RuntimeException();
+        }
+        //exception
+    }
+
 }
