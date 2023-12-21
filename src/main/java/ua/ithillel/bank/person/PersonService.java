@@ -1,6 +1,9 @@
 package ua.ithillel.bank.person;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PersonService {
@@ -16,12 +20,28 @@ public class PersonService {
     private final PersonMapper personMapper;
 
     public List<PersonDto> findPersons(String name, String email, Pageable pageable) {
-        var specification = Specification.where(fieldValueEqualQuery("name", name))
-                .and(fieldValueEqualQuery("email", email));
+        try {
+            MDC.put("test", "testValue");
+            MDC.put("test1", "testValue");
+            MDC.put("test2", "testValue");
+            MDC.put("test3", "testValue");
+            var specification = Specification.where(fieldValueEqualQuery("name", name))
+                    .and(fieldValueEqualQuery("email", email));
 
-        return personRepository.findAll(specification).stream()
-                .map(personMapper::map)
-                .toList();
+            if (true) {
+                log.info("case 1");
+                //1
+            } else {
+                log.info("case 2");
+                ///2
+            }
+            return personRepository.findAll(specification).stream()
+                    .map(personMapper::map)
+                    .toList();
+        } finally {
+            MDC.clear();
+        }
+
     }
 
     private Specification<Person> fieldValueEqualQuery(String fieldName, String fieldValue) {
@@ -41,5 +61,13 @@ public class PersonService {
                 .name(request.name())
                 .email(request.email())
                 .build()));
+    }
+
+//    @Transactional
+    public void update(String uid) {
+        var person = personRepository.findByUid(uid).orElseThrow();
+
+        person.setEmail("email");
+//          personRepository.save(person);
     }
 }
