@@ -1,0 +1,12 @@
+FROM eclipse-temurin:17.0.7_7-jdk-alpine as build
+
+WORKDIR /usr/src/app
+
+COPY . .
+RUN ./gradlew build -x test
+
+FROM eclipse-temurin:17.0.7_7-jre-alpine as release
+
+COPY --from=build /usr/src/app/build/libs/hillel*.jar /usr/local/lib/app.jar
+
+CMD java -jar /usr/local/lib/app.jar
